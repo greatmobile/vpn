@@ -59,6 +59,8 @@ tls-cipher TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256
 ignore-unknown-option block-outside-dns
 setenv opt block-outside-dns # Prevent Windows 10 DNS leak
 verb 3
+dhcp-option DNS 1.1.1.1
+dhcp-option DNS 1.0.0.1
 auth-user-pass
 END
 
