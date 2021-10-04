@@ -41,27 +41,17 @@ sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 cat > /etc/openvpn/client-tcp-1194.ovpn <<-END
 ############# GREATMOBILE ##############
 client
-proto tcp
-explicit-exit-notify
-remote xxxxxxxxx 1194
 dev tun
+proto tcp
+remote xxxxxxxxx 1194
 resolv-retry infinite
+route-method exe
 nobind
 persist-key
 persist-tun
-remote-cert-tls server
-auth SHA256
-auth-nocache
-cipher AES-128-GCM
-tls-client
-tls-version-min 1.2
-tls-cipher TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256
-ignore-unknown-option block-outside-dns
-setenv opt block-outside-dns # Prevent Windows 10 DNS leak
-verb 3
-dhcp-option DNS 1.1.1.1
-dhcp-option DNS 1.0.0.1
 auth-user-pass
+comp-lzo
+verb 3
 END
 
 sed -i $MYIP2 /etc/openvpn/client-tcp-1194.ovpn;
