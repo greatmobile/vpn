@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# By CTechDidik
+# By SAMVPN
 # ==================================================
 
 # initialisasi var
@@ -41,7 +41,7 @@ sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 cat > /etc/openvpn/client-tcp-1194.ovpn <<-END
 ############# GREATMOBILE ##############
 client
-proto udp
+proto tcp
 explicit-exit-notify
 remote xxxxxxxxx 1194
 dev tun
@@ -50,7 +50,6 @@ nobind
 persist-key
 persist-tun
 remote-cert-tls server
-verify-x509-name server_qH1nYALHRrn4Gb0D name
 auth SHA256
 auth-nocache
 cipher AES-128-GCM
@@ -60,6 +59,7 @@ tls-cipher TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256
 ignore-unknown-option block-outside-dns
 setenv opt block-outside-dns # Prevent Windows 10 DNS leak
 verb 3
+auth-user-pass
 END
 
 sed -i $MYIP2 /etc/openvpn/client-tcp-1194.ovpn;
